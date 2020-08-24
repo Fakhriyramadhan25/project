@@ -1,0 +1,140 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ArcGIS JavaScript Tutorials: Add layers to a map</title>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+  </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css">
+  <link rel="stylesheet" href="index.css">
+
+</head>
+<body>
+  <div id="viewDiv">
+    <script src="https://js.arcgis.com/4.15/"></script>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/FeatureLayer",
+      "esri/widgets/BasemapToggle",
+      "esri/widgets/BasemapGallery",
+      "esri/widgets/Search"
+    ], function(Map, MapView, FeatureLayer,  BasemapToggle, BasemapGallery, Search) {
+
+      var map = new Map({
+//          topo-vector
+        basemap: "topo-vector"
+      });
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [104.053252, 1.130432],
+        zoom: 10,
+        wkid: 4326
+      });
+
+//     // Find address
+//
+//      view.on("click", function(evt){
+//        search.clear();
+//        view.popup.clear();
+//        if (search.activeSource) {
+//          var geocoder = search.activeSource.locator; // World geocode service
+//          var params = {
+//            location: evt.mapPoint
+//          };
+//          geocoder.locationToAddress(params)
+//            .then(function(response) { // Show the address found
+//              var address = response.address;
+//            showPopup(address, evt.mapPoint);
+//            }, function(err) { // Show no address found
+//              showPopup("No address found.", evt.mapPoint);
+//                });
+//            }
+//          });
+//
+//      function showPopup(address, pt) {
+//        view.popup.open({
+//          title:  + Math.round(pt.longitude * 100000)/100000 + ", " + Math.round(pt.latitude * 100000)/100000,
+//          content: address,
+//          location: pt
+//        });
+//      }
+
+      //popup atribut tabel
+      var popupswp = {
+        "title": "SWP Daerah",
+        "content": "<b>Nama:</b> {NAMOBJ}<br><b>Kode:</b> {FCODE}<br>"
+      }
+
+      // input feature layer untuk SWP (polygons)
+      var swp = new FeatureLayer({
+        url: "https://services8.arcgis.com/IZNPdYBN3NgLcqEF/arcgis/rest/services/Batas_Wilayah_Kerja/FeatureServer/0",
+        outFields:["NAMOBJ","FCODE"],
+        popupTemplate: popupswp
+        });
+
+      map.add(swp, 0);
+
+        //popup atribut tabel
+      var popupswp = {
+        "title": "Jalan Batam",
+        "content": "<b>Nama:</b> {name}<br><b>Panjang:</b> {Panjang}<br>"
+      }
+
+      // input feature layer untuk Jalan Batam (polygons)
+      var jalanbatam = new FeatureLayer({
+        url: "https://services8.arcgis.com/IZNPdYBN3NgLcqEF/arcgis/rest/services/jalan_batam_fix/FeatureServer/0",
+        outFields:["name","Panjang"],
+        popupTemplate: popupswp
+        });
+
+      map.add(jalanbatam, 0);
+
+        //Widget Basemap
+        var basemapGallery = new BasemapGallery({
+            view: view,
+            source: {
+                portal: {
+                    url: "http://www.arcgis.com",
+
+                    // Load vector tile basemap group
+                    useVectorBasemaps: true,
+                },
+                    }
+                        });
+
+//        // Add to the view
+//        view.ui.add(basemapGallery, "top-right");
+
+        //Add toggle down
+        var basemapToggle = new BasemapToggle({
+        view: view,
+        secondMap: "hybrid"
+        });
+
+        view.ui.add(basemapToggle,"bottom-right");
+
+        // Add Search widget
+          var search = new Search({
+            view: view
+          });
+          view.ui.add(search, "top-right"); // Add to the map
+    });
+
+
+  </script>
+    </div>
+
+</body>
+</html>

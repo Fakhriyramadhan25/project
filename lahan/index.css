@@ -1,0 +1,68 @@
+def calc(a,b,c,d):
+    if a==" " and b == "HPL" and c == "Kampung":
+        d = "Bukan Hutan - HPL - Kampung Tua"
+    elif a==" " and b == "HPL" and c != "Kampung":
+        d = "Bukan Hutan - HPL - Bukan Kampung Tua"
+    elif a==" " and b == "PROSES" and c == "Kampung":
+        d = "Bukan Hutan - PROSES - Kampung"
+    elif a==" " and b == "PROSES" and c != "Kampung":
+        d = "Bukan Hutan - PROSES - Bukan Kampung Tua"
+    elif a==" " and b == "o" and c == "Kampung":
+        d = "Bukan Hutan - Belum HPL - Kampung"
+    elif a==" " and b == "o" and c != "Kampung":
+        d = "Bukan Hutan - Belum HPL - Bukan Kampung Tua"
+    elif a!=" " and b == "HPL" and c == "Kampung":
+        d = "Hutan - HPL - Kampung Tua"
+    elif a!=" " and b == "HPL" and c != "Kampung":
+        d = "Hutan - HPL - Bukan Kampung Tua"
+    elif a!=" " and b == "PROSES" and c == "Kampung":
+        d = "Hutan - PROSES - Kampung"
+    elif a!=" " and b == "PROSES" and c != "Kampung":
+        d = "Hutan - PROSES - Bukan Kampung Tua"
+    elif a!=" " and b == "o" and c == "Kampung":
+        d = "Hutan - Belum HPL - Kampung"
+    elif a!=" " and b == "o" and c != "Kampung":
+        d = "Hutan - Belum HPL - Bukan Kampung Tua"
+    return d
+
+
+def calc(a,b):
+    if a=="KOMERSIAL" :
+        b='KOMERSIAL'
+    elif a=="INDUSTRI" :
+        b = "INDUSTRI"
+    elif a=="BANDARA" :
+        b = "BANDARA"
+    elif a=="APARTEMEN" :
+        b = "KOMERSIAL"
+    elif a=="FASILITAS OLAH RAGA" :
+        b = "FASILITAS UMUM"
+    elif a=="FASILITAS SOSIAL PEMERINTAH" :
+        b = "FASILITAS UMUM"
+    elif a=="FASILITAS SOSIAL SWASTA & BUMN" :
+        b = "FASILITAS UMUM"
+    elif a=="PERUMAHAN TAPAK" :
+        b = "PERUMAHAN"
+    elif a=="PERUMAHAN KAVLING SIAP BANGUN (KSB)" :
+        b = "PERUMAHAN"
+    elif a=="RUMAH SUSUN SEDERHANA" :
+        b = "PERUMAHAN"
+    elif a=="PARIWISATA" :
+        b = "PARIWISATA"
+    elif a=="LAPANGAN GOLF" :
+        b = "PARIWISATA"
+    elif a=="PERIKANAN" :
+        b = "PERIKANAN"
+    elif a=="PERTANIAN" :
+        b = "PERTANIAN"
+    elif a=="PELABUHAN" :
+        b = "PELABUHAN"
+    elif a=="PENGHIJAUAN" :
+        b = "PENGHIJAUAN"
+    elif a=="BADAN AIR" :
+        b = "BADAN AIR"
+    elif a=="BANGUNAN & KANTOR PEMERINTAH" :
+        b = "BANGUNAN & KANTOR PEMERINTAH"
+    elif a=="WADUK" :
+        b = "WADUK"
+    return b
