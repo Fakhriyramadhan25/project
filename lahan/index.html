@@ -127,7 +127,20 @@
 
         // Add Search widget
           var search = new Search({
-            view: view
+            view: view,
+            allPlaceholder: "Pengelolaan Lahan",
+            sources: [
+                {
+                layer: swp,
+                searchFields: ["NAMOBJ"],
+                suggestionTemplate: "{NAMOBJ}",
+                exactmatch:false,
+                outfields:["*"],
+                placeholder: "example: Sekupang",
+                name:"SWP Batam",
+                zoomScale: 10000,
+                }
+            ]
           });
           view.ui.add(search, "top-right"); // Add to the map
     });
