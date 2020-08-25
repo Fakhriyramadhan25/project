@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>ArcGIS JavaScript Tutorials: Add layers to a map</title>
+  <title>Peta Lahan Batam</title>
   <style>
     html, body, #viewDiv {
       padding: 0;
@@ -10,6 +10,17 @@
       height: 100%;
       width: 100%;
     }
+
+  #checkbox{
+     position: absolute;
+    top: 55px;
+    right: 20px;
+    font-size:12px;
+    padding: 8px;
+    background: white;
+    border-radius: 2px;
+    opacity: 0.8;
+      }
 
   </style>
   <link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css">
@@ -27,8 +38,9 @@
       "esri/layers/FeatureLayer",
       "esri/widgets/BasemapToggle",
       "esri/widgets/BasemapGallery",
-      "esri/widgets/Search"
-    ], function(Map, MapView, FeatureLayer,  BasemapToggle, BasemapGallery, Search) {
+      "esri/widgets/Search",
+      "esri/views/SceneView"
+    ], function(Map, MapView, FeatureLayer,  BasemapToggle, BasemapGallery, Search, SceneView) {
 
       var map = new Map({
 //          topo-vector
@@ -142,12 +154,27 @@
                 }
             ]
           });
-          view.ui.add(search, "top-right"); // Add to the map
+        // Add to the map
+          view.ui.add(search, "top-right");
+
+        var checkdata = document.getElementById("swplayer");
+        checkdata.addEventListener("change",function(){
+        swp.visible = checkdata.checked;
+//
+        });
+        var checkdata = document.getElementById("swplayer");
+        checkdata.addEventListener("change",function(){
+        jalanbatam.visible = checkdata.checked;
+        });
     });
 
 
   </script>
     </div>
-
+<div id="checkbox">
+    <span id="layerToggle" class="esri-widget">
+      <input type="checkbox" id="swplayer" /> Data SWP
+    </span>
+    </div>
 </body>
 </html>
