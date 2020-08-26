@@ -145,7 +145,7 @@
             koor.className="esri-widget esri-component";
             koor.style.padding = "7px 15px 5px";
 
-        view.ui.add(koor);
+        view.ui.add(koor, "bottom-left");
 
         function showCoordinates (pt) {
             var titik = "Lat/Lon : " + pt.latitude.toFixed(3) + " / " + pt.longitude.toFixed(3);
@@ -175,9 +175,6 @@
     </span>
     </div>
 
-    <div>
-
-    </div>
 
 
 
