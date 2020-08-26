@@ -18,8 +18,19 @@
     font-size:12px;
     padding: 8px;
     background: white;
-    border-radius: 2px;
+    border-radius: 10px;
     opacity: 0.8;
+      }
+
+  #latlong{
+      position: absolute;
+      bottom:50px;
+      right: 40%;
+      border-radius: 10px;
+      padding: 8px;
+      opacity: 0.8;
+      background: white;
+
       }
 
   </style>
@@ -29,6 +40,7 @@
 </head>
 <body>
   <div id="viewDiv">
+
     <script src="https://js.arcgis.com/4.15/"></script>
 
   <script>
@@ -145,7 +157,8 @@
             koor.className="esri-widget esri-component";
             koor.style.padding = "7px 15px 5px";
 
-        view.ui.add(koor, "bottom-left");
+
+        view.ui.add(koor);
 
         function showCoordinates (pt) {
             var titik = "Lat/Lon : " + pt.latitude.toFixed(3) + " / " + pt.longitude.toFixed(3);
@@ -160,12 +173,14 @@
             showCoordinates(view.toMap({x: evt.x, y:evt.y}));
         });
 
+        var koordinat = document.getElementById("latlong");
+        koordinat.appendChild(koor);
+
     });
 
 
   </script>
-    </div>
-<div id="checkbox">
+      <div id="checkbox">
     <span class="esri-widget">
       <input type="checkbox" id="swplayer" /> Data SWP
     </span>
@@ -174,6 +189,10 @@
       <input type="checkbox" id="jalanlayer" /> Jalan Batam
     </span>
     </div>
+      <div id="latlong">
+    </div>
+    </div>
+
 
 
 
