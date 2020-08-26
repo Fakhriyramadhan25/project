@@ -55,34 +55,6 @@
         wkid: 4326
       });
 
-//     // Find address
-//
-//      view.on("click", function(evt){
-//        search.clear();
-//        view.popup.clear();
-//        if (search.activeSource) {
-//          var geocoder = search.activeSource.locator; // World geocode service
-//          var params = {
-//            location: evt.mapPoint
-//          };
-//          geocoder.locationToAddress(params)
-//            .then(function(response) { // Show the address found
-//              var address = response.address;
-//            showPopup(address, evt.mapPoint);
-//            }, function(err) { // Show no address found
-//              showPopup("No address found.", evt.mapPoint);
-//                });
-//            }
-//          });
-//
-//      function showPopup(address, pt) {
-//        view.popup.open({
-//          title:  + Math.round(pt.longitude * 100000)/100000 + ", " + Math.round(pt.latitude * 100000)/100000,
-//          content: address,
-//          location: pt
-//        });
-//      }
-
       //popup atribut tabel
       var popupswp = {
         "title": "SWP Daerah",
@@ -160,21 +132,55 @@
         var checkdata = document.getElementById("swplayer");
         checkdata.addEventListener("change",function(){
         swp.visible = checkdata.checked;
-//
         });
-        var checkdata = document.getElementById("swplayer");
-        checkdata.addEventListener("change",function(){
-        jalanbatam.visible = checkdata.checked;
+        var checkjalan = document.getElementById("jalanlayer");
+        checkjalan.addEventListener("change",function(){
+        jalanbatam.visible = checkjalan.checked;
         });
+
+
+        //buat widget koordinat
+        var koor = document.createElement("div");
+            koor.id = "koor";
+            koor.className="esri-widget esri-component";
+            koor.style.padding = "7px 15px 5px";
+
+        view.ui.add(koor);
+
+        function showCoordinates (pt) {
+            var titik = "Lat/Lon : " + pt.latitude.toFixed(3) + " / " + pt.longitude.toFixed(3);
+            koor.innerHTML = titik;
+        }
+
+        view.watch(["stationary"], function(){
+            showCoordinates(view.center);
+        });
+
+        view.on(["pointer-down", "pointer-move"], function(evt){
+            showCoordinates(view.toMap({x: evt.x, y:evt.y}));
+        });
+
     });
 
 
   </script>
     </div>
 <div id="checkbox">
-    <span id="layerToggle" class="esri-widget">
+    <span class="esri-widget">
       <input type="checkbox" id="swplayer" /> Data SWP
     </span>
+<br>
+    <span class="esri-widget">
+      <input type="checkbox" id="jalanlayer" /> Jalan Batam
+    </span>
     </div>
+
+    <div>
+
+    </div>
+
+
+
+
 </body>
 </html>
