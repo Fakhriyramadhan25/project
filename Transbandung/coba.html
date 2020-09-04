@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NYOBA</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http:\\localhost:80\transbdg\v5.3.0\css\ol.css">
+	<!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="http:\\localhost:80\transbdg\v5.3.0\build\ol.js"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v5.3.0/build/ol.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  </head>
+
+  <body>
+    <div id="map" class="map"></div>
+    <script src="https://openlayers.org/en/v5.3.0/build/ol.js" type="text/javascript"> </script>
+
+    <script defer="defer" type="text/javascript">
+
+    var view = new ol.View({
+          center: ol.proj.fromLonLat([107.611911, -6.891464]),
+          zoom: 3
+     })
+
+    var map =
+        new ol.Map({
+        target: 'map',
+        layers: [
+        new ol.layer.Tile({
+        source: new ol.source.OSM ()
+       })
+      ],
+        view: view
+      });
+
+
+        // var rute = [
+        //     new ol.layer.Tile({
+        //         source: new ol.source.OSM ()
+        //     }),
+        //     new ol.layer.Tile({
+        //         extent: [-124.73142200000001,24.955967,-66.969849,49.371735],
+        //         source: new ol.source.TileWMS({
+        //         url: 'https://localhost:1111/geoserver/topp/wms',
+        //         params : {'LAYERS':'topp:states','VERSION':'1.1.0', 'SRS':'EPSG:4326'},
+        //         serverType: 'geoserver'
+        //         })
+        //     })
+        // ];
+
+
+        var rute = new ol.source.TileWMS({
+    url: 'http://localhost:1111/geoserver/coba/wms',
+    params: {'LAYERS': 'coba:Kota_Jawa', 'SRS': 'EPSG:4326'},
+    serverType: 'geoserver'
+    })
+
+	  var indonesia = new ol.layer.Tile({
+   source: rute
+  });
+
+     map.addLayer(indonesia);
+
+    //  Layer Desa Tradisional Polygon
+    // var angkot = new ol.source.Vector({
+    //   format: new ol.format.GeoJSON(),
+    //   url: function(extent) {
+    //     let url = 'http://localhost/geoserver/coba/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=coba:Kota_Jawa&maxFeatures=50&outputFormat=application%2Fjson';
+    //     return url;
+    //   },
+
+    //   strategy: ol.loadingstrategy.bbox
+    // });
+
+    // var rute = new ol.layer.Vector({
+    //   source: angkot,
+    //     style: new ol.style.Style({
+    //     fill: new ol.style.Style({
+    //     color: 'rgba(205, 92, 92, 1.0)'
+    //     })
+    //     // stroke: new ol.style.Stroke({
+    //     //   color: '#B22222',
+    //     //   width: 1.25
+    //     // })
+    //   })
+    // });
+
+    // map.addLayer(rute);
+
+
+    // Layer kondisi air minum bali
+// var rute = new ol.source.Vector({
+// 	format: new ol.format.GeoJSON(),
+// 	url: function(extent) {
+//     let url = 'http://localhost:1111/geoserver/transbdg/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=transbdg:hasildijkstra&maxFeatures=50&outputFormat=application%2Fjson';
+// 	  return url;
+// 	},
+// 	strategy: ol.loadingstrategy.bbox
+// });
+
+
+
+// var angkot = new ol.layer.Vector({
+// 	source: rute
+// });
+
+// map.addLayer(angkot);
+
+
+    //http://localhost:1111/geoserver/coba/ows?
+    //service=WFS&version=1.0.0&request=GetFeature
+    //&typeName=coba:Kota_Jawa&maxFeatures=50&
+    //outputFormat=application%2Fjson
+
+        // http://localhost:1111/geoserver/topp/wms?service=WMS&version=1.1.0
+        // &request=GetMap&layers=topp:states&styles=&bbox=-124.73142200000001,24.955967,-66.969849,49.371735&
+        // width=768&height=330&srs=EPSG:4326&format=application/openlayers
+
+        // http://localhost:1111/geoserver/coba/wms?service=WMS&version=1.1.0&request=GetMap&layers=coba:Kota_Jawa
+        // &styles=&bbox=105.502324,-8.593974,115.566414,-5.382354&width=768&height=330
+        // &srs=EPSG:4326&format=text%2Fhtml%3B%20subtype%3Dopenlayers
+
+      </script>
+  </body>
+</html>
