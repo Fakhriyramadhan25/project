@@ -13,10 +13,16 @@
             return this.gMap.setZoom(level);
         }
     },
-    _on: function(event,callback) {
+
+    _on: function(opts) {
         var self = this;
-        google.maps.event.addListener(this.gMap, event, function(e){callback.call(self,e);});
+        google.maps.event.addListener(opts.obj, opts.event, function(e){opts.callback.call(self,e);});
     },
+
+//    _on: function(event,callback) {
+//        var self = this;
+//        google.maps.event.addListener(this.gMap, event, function(e){callback.call(self,e);});
+//    },
 
 //    addMarker: function(lat,lng,draggable){
 //        this._createMarker(lat,lng,draggable);
@@ -34,12 +40,33 @@
 //    return new google.maps.Marker(opts);
 //    }
 
-        addMarker: function(opts){
+    addMarker: function(opts){
+    var marker;
     opts.position= {
         lat: opts.lat,
         lng: opts.lng
     }
-     this._createMarker(opts);
+     marker = this._createMarker(opts);
+        if(opts.event){
+            this._on({
+                obj:marker,
+                event: opts.event.name,
+                callback: opts.event.callback
+            });
+        }
+        if(opts.content){
+            this._on({
+                obj: marker,
+                event: 'click',
+                callback: function(){
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: opts.content
+                    });
+                infoWindow.open(this.gMap,marker);
+                }
+            })
+        }
+    return marker;
     },
 
     _createMarker: function(opts){

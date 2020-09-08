@@ -21,18 +21,51 @@
 //    map.gMap.setZoom(16);
      map.zoom(14);
 
-    map._on('click',function(e){
-       alert('click');
-        console.log(e);
-        console.log(this);
-    });
+//    map._on('click',function(e){
+//       alert('click');
+//        console.log(e);
+//        console.log(this);
+//    });
 
     map.addMarker({
     lat:1.131231,
     lng:104.052988,
-    draggable:true,   icon:'https://image.flaticon.com/icons/svg/235/235861.svg'});
+    draggable:true,
+    event: {
+    name:'click',
+    callback: function(){
+    alert('im good');
+    }
+    },
+    });
 
-//        map.addMarker(1.131231, 104.052988,true);
+    map.addMarker({
+    lat:1.131231,
+    lng:104.152988,
+    draggable:true,
+    event: {
+    name:'dragend',
+    callback: function(){
+    alert('im good');
+    }
+    },
+    });
+
+    var marker = map.addMarker({
+    lat:1.131231,
+    lng:104.122988,
+    draggable:true,
+    content: 'good is better'
+    });
+
+//    var infoWindow = new google.maps.InfoWindow({
+//        content: 'i like food'
+//    });
+//
+//    infoWindow.open(map.gMap, marker);
+
+
+    //    map.addMarker(1.131231, 104.052988,true);
 //    var marker = new google.maps.Marker({
 //        position: {
 //            lat: 1.131231,
