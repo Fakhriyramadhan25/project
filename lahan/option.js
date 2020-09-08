@@ -5,13 +5,13 @@
          lat: 1.131231,
          lng: 104.052988
      },
-    zoom:15,
+//    zoom:15,
         disableDefaultUI: false,
         scrollwheel: true,
         draggable : true,
         mapTypeId: google.maps.MapTypeId.SATELLITE,
-        maxZoom: 25,
-        minZoom:3,
+//        maxZoom: 25,
+//        minZoom:3,
         zoomControlOptions : {
           position: google.maps.ControlPosition.RIGHT_TOP,
           style : google.maps.ZoomControlStyle.SMALL
